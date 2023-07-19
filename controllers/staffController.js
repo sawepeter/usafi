@@ -40,3 +40,50 @@ const createStaffProfile = async (req, res) => {
     }
 
 }
+
+//fetch all staff
+const getAllStaff = async (req, res) => {
+    const user_id = req.user_id
+
+    const allStaff = await Staff.find({user_id}).sort(({createdAt: -1}))
+
+    res.status(200).json(allStaff)
+}
+
+//fetch a single staff
+const getStaff = async (req, res) => {
+    const { id } = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({error: 'staff does not exist'})
+    }
+
+    const staff = await Staff.findById(id)
+
+    if(!staff) {
+        return res.status(404).json({error: 'staff does not exist'})
+    }
+
+    res.status(200).json(staff)
+}
+
+//update staff status
+const updateStaffStatus = async (req, res) => {
+    const { id } = req.params
+    
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'staff does not exist'})
+    }
+
+    const staff = await Staff.findOneAndUpdate({_id: id}, {
+        ...req.body
+    })
+
+    if(!staff) {
+        return res.status(404).json({error: 'staff does not exist'})
+    }
+
+    res.status(200).json(staff)
+}
+
+module.exports = { createStaffProfile, getAllStaff, getStaff, updateStaffStatus }
