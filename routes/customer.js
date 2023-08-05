@@ -6,9 +6,9 @@ const { registerCustomer,loginCustomer} = require('../controllers/customerContro
 const router = express.Router()
 
 //login route
-router.post('/customer/login', loginCustomer)
+router.post('/login', loginCustomer)
 
 //register route
-router.post('/customer/register', registerCustomer)
+router.post('/register', registerCustomer)
 
 module.exports = router

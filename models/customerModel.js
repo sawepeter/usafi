@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 
 const customerSchema = new Schema({
     phoneNumber: {
-        type: Integer,
+        type: String,
         required: true,
         unique: true
     },
@@ -65,4 +65,4 @@ customerSchema.statics.login = async function(phoneNumber, password) {
     return customer
 }
 
-module.exports = mongoose.model('Customer', userSchema)
+module.exports = mongoose.model('Customer', customerSchema)
