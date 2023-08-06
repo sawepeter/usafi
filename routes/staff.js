@@ -1,5 +1,8 @@
 const express = require('express')
-const { createStaffProfile } = require('../controllers/staffController')
+const { createStaffProfile, 
+        getAllStaff,
+        getStaff, 
+        updateStaffStatus } = require('../controllers/staffController')
 
 const requireAuth = require('../middleware/requireAuth')
 
@@ -8,8 +11,17 @@ const router = express.Router()
 //require auth for all staff routes
 router.use(requireAuth)
 
-//create staff profile
-router.get('/', createStaffProfile)
+//post staff profile
+router.post('/', createStaffProfile)
+
+//get all staffs
+router.get('/', getAllStaff)
+
+//get a single staff
+router.get('/', getStaff)
+
+//update staff status
+router.get('/:id', updateStaffStatus)
 
 
 module.exports = router
